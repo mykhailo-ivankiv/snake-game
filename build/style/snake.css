@@ -1,0 +1,21 @@
+.snake {
+  height: 400px;
+  width: 400px;
+  margin: 20px auto;
+  border: 1px solid black; }
+  .snake__row {
+    overflow: hidden; }
+  .snake__cell {
+    float: left;
+    border: 1px solid gold;
+    width: 20px;
+    height: 20px;
+    margin: 2px; }
+    .snake__cell--field {
+      background: white; }
+    .snake__cell--snake {
+      background: grey; }
+    .snake__cell--wall {
+      background: #b94a48; }
+    .snake__cell--fruit {
+      background: #006400; }
