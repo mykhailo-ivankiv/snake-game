@@ -1,21 +1,23 @@
 .snake {
-  height: 400px;
-  width: 400px;
+  height: 360px;
+  width: 360px;
   margin: 20px auto;
-  border: 1px solid black; }
+  border: 1px solid #bdc3c7;
+  border-radius: 4px; }
   .snake__row {
     overflow: hidden; }
   .snake__cell {
     float: left;
-    border: 1px solid gold;
     width: 20px;
     height: 20px;
-    margin: 2px; }
+    margin: 1px;
+    border: 1px solid #ecf0f1;
+    border-radius: 3px; }
     .snake__cell--field {
       background: white; }
     .snake__cell--snake {
-      background: grey; }
+      background: #3498db; }
     .snake__cell--wall {
-      background: #b94a48; }
+      background: #e67e22; }
     .snake__cell--fruit {
-      background: #006400; }
+      background: #1abc9c; }

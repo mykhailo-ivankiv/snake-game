@@ -12,7 +12,7 @@ define(["exports", "module", "utils/BEM"], function (exports, module, _utilsBEM)
     var b = BEM.b("snake");
 
     var Snake = (function () {
-        function Snake() {
+        function Snake(_x, config) {
             var container = arguments[0] === undefined ? document.body : arguments[0];
 
             _classCallCheck(this, Snake);
@@ -36,16 +36,16 @@ define(["exports", "module", "utils/BEM"], function (exports, module, _utilsBEM)
                 value: function changeSnakeDirection(ev) {
                     var key = ev.keyCode;
 
-                    if (key === 38) {
+                    if (key === 38 && this.direction !== "bottom") {
                         this.direction = "top";
                     } //top
-                    if (key === 37) {
+                    if (key === 37 && this.direction !== "right") {
                         this.direction = "left";
                     } //left
-                    if (key === 39) {
+                    if (key === 39 && this.direction !== "left") {
                         this.direction = "right";
                     } //right
-                    if (key === 40) {
+                    if (key === 40 && this.direction !== "top") {
                         this.direction = "bottom";
                     } //bottom
                 }

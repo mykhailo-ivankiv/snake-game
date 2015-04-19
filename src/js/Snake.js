@@ -1,9 +1,9 @@
 import BEM from "utils/BEM";
 
-var b = BEM.b("snake")
+var b = BEM.b("snake");
 
 class Snake {
-    constructor (container = document.body) {
+    constructor (container = document.body, config) {
         this.container = container;
         this.model = [
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -44,10 +44,10 @@ class Snake {
     changeSnakeDirection(ev) {
         var key = ev.keyCode;
 
-        if (key === 38) { this.direction = "top";} //top
-        if (key === 37) { this.direction = "left";} //left
-        if (key === 39) { this.direction = "right";} //right
-        if (key === 40) { this.direction = "bottom";} //bottom
+        if (key === 38 && this.direction !== "bottom") { this.direction = "top";} //top
+        if (key === 37 && this.direction !== "right") { this.direction = "left";} //left
+        if (key === 39 && this.direction !== "left") { this.direction = "right";} //right
+        if (key === 40 && this.direction !== "top") { this.direction = "bottom";} //bottom
     }
 
     updateModel () {
