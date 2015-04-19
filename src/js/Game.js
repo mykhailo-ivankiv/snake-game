@@ -16,6 +16,18 @@ let cssClass = {
     empty: "empty",
     snake: "snake",
     food: "food"
+};
+
+class Grid {
+    constructor (rows, cols, val) {
+        this.height = rows; // y
+        this.width = cols; // x
+
+        this.body = utils.generateGrid(this.height, this.width, val);
+    }
+
+    set (x, y, val) { this.body[y][x] = val; }
+    get (x, y) { return this.body[y][x]; }
 }
 
 class Game {
@@ -23,9 +35,15 @@ class Game {
         this.container = this.createContainer(container);
 
         this.anim;
-        this.boundRecursiveAnim = this.loop.bind(this);
-        this.init();
-        this.loop();
+
+        this.grid = new Grid(ROWS, COLS, EMPTY);
+
+        this.snake = this.createSnake();
+        this.snake.set();
+        this.food = this.createFood();
+        this.food.set();
+
+        window.setInterval(this.update.bind(this), 500);
     }
 
     createContainer(container) {
@@ -33,31 +51,6 @@ class Game {
         gameContainer.classList.add(cssClass.game);
 
         return container.appendChild(gameContainer);;
-    }
-
-    createGrid() {
-        let grid = Object.create(null);
-
-        grid.height = null;
-        grid.width = null;
-        grid.body = [];
-
-        grid.init = function(rows, cols, val) {
-            this.height = rows; // y
-            this.width = cols; // x
-
-            this.body = utils.generateGrid(this.height, this.width, val);
-        }
-
-        grid.set = function(x, y, val) {
-            this.body[y][x] = val;
-        }
-
-        grid.get = function(x, y) {
-            return this.body[y][x];
-        }
-
-        return grid;
     }
 
     createSnake() {
@@ -139,26 +132,12 @@ class Game {
         this.container.innerHTML = items;
     }
 
-    init() {
-        this.grid = this.createGrid();
-        this.grid.init(ROWS, COLS, EMPTY);
-        this.snake = this.createSnake();
-        this.snake.set();
-        this.food = this.createFood();
-        this.food.set();
-    }
-
-    loop() {
-        this.render();
-
-        this.anim = window.requestAnimationFrame(this.boundRecursiveAnim);
-    }
-
     update() {
+        console.log("Update");
+        // pdate Model
 
+        this.render();
     }
-
-
 }
 
 export default Game;
