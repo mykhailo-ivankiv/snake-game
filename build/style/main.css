@@ -1,0 +1,22 @@
+body {
+  margin: 0;
+  padding: 0; }
+
+.game-container {
+  width: 375px;
+  height: 250px;
+  margin: auto;
+  background-color: white;
+  border: 1px solid #7f8c8d;
+  overflow: hidden; }
+  .game-container .cell {
+    width: 25px;
+    height: 25px;
+    float: left;
+    text-align: center;
+    box-shadow: 0 0 1px #16a085 inset; }
+    .game-container .cell.food {
+      background-color: #f39c12; }
+    .game-container .cell.snake {
+      background-color: #c0392b;
+      color: white; }
