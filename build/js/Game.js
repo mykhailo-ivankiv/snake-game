@@ -30,6 +30,32 @@ define(["exports", "module", "utils/utils"], function (exports, module, _utilsUt
         food: "food"
     };
 
+    var Grid = (function () {
+        function Grid(rows, cols, val) {
+            _classCallCheck(this, Grid);
+
+            this.height = rows; // y
+            this.width = cols; // x
+
+            this.body = utils.generateGrid(this.height, this.width, val);
+        }
+
+        _createClass(Grid, {
+            set: {
+                value: function set(x, y, val) {
+                    this.body[y][x] = val;
+                }
+            },
+            get: {
+                value: function get(x, y) {
+                    return this.body[y][x];
+                }
+            }
+        });
+
+        return Grid;
+    })();
+
     var Game = (function () {
         function Game() {
             var container = arguments[0] === undefined ? document.body : arguments[0];
@@ -39,9 +65,15 @@ define(["exports", "module", "utils/utils"], function (exports, module, _utilsUt
             this.container = this.createContainer(container);
 
             this.anim;
-            this.boundRecursiveAnim = this.loop.bind(this);
-            this.init();
-            this.loop();
+
+            this.grid = new Grid(ROWS, COLS, EMPTY);
+
+            this.snake = this.createSnake();
+            this.snake.set();
+            this.food = this.createFood();
+            this.food.set();
+
+            window.setInterval(this.update.bind(this), 500);
         }
 
         _createClass(Game, {
@@ -51,32 +83,6 @@ define(["exports", "module", "utils/utils"], function (exports, module, _utilsUt
                     gameContainer.classList.add(cssClass.game);
 
                     return container.appendChild(gameContainer);;
-                }
-            },
-            createGrid: {
-                value: function createGrid() {
-                    var grid = Object.create(null);
-
-                    grid.height = null;
-                    grid.width = null;
-                    grid.body = [];
-
-                    grid.init = function (rows, cols, val) {
-                        this.height = rows; // y
-                        this.width = cols; // x
-
-                        this.body = utils.generateGrid(this.height, this.width, val);
-                    };
-
-                    grid.set = function (x, y, val) {
-                        this.body[y][x] = val;
-                    };
-
-                    grid.get = function (x, y) {
-                        return this.body[y][x];
-                    };
-
-                    return grid;
                 }
             },
             createSnake: {
@@ -153,25 +159,13 @@ define(["exports", "module", "utils/utils"], function (exports, module, _utilsUt
                     this.container.innerHTML = items;
                 }
             },
-            init: {
-                value: function init() {
-                    this.grid = this.createGrid();
-                    this.grid.init(ROWS, COLS, EMPTY);
-                    this.snake = this.createSnake();
-                    this.snake.set();
-                    this.food = this.createFood();
-                    this.food.set();
-                }
-            },
-            loop: {
-                value: function loop() {
-                    this.render();
-
-                    this.anim = window.requestAnimationFrame(this.boundRecursiveAnim);
-                }
-            },
             update: {
-                value: function update() {}
+                value: function update() {
+                    console.log("Update");
+                    // pdate Model
+
+                    this.render();
+                }
             }
         });
 
