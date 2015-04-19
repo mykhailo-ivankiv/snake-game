@@ -1,0 +1,45 @@
+$numberOfCells: 15;
+$rows: 10;
+$cellWidth: 25px;
+$cellHeight: $cellWidth;
+$gameWidth: $numberOfCells * $cellWidth;
+$gameHeight:  $rows * $cellHeight;
+
+// colors
+$greenSea:      #16a085;
+$pumpkin:       #d35400;
+$orange:        #f39c12;
+$pomegranate:   #c0392b;
+$clouds:        #ecf0f1;
+$asbestos:      #7f8c8d;
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.game-container {
+    width: $gameWidth;
+    height: $gameHeight;
+    margin: auto;
+    background-color: lighten($clouds, 20%);
+    border: 1px solid $asbestos;
+    overflow: hidden;
+
+    .cell {
+        width: $cellWidth;
+        height: $cellHeight;
+        float: left;
+        text-align: center;
+        box-shadow: 0 0 1px $greenSea inset;
+
+        &.food {
+            background-color: $orange;
+        }
+
+        &.snake {
+            background-color: $pomegranate;
+            color: white;
+        }
+    }
+}
