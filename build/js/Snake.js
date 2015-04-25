@@ -1,4 +1,4 @@
-define(["exports", "module", "utils/BEM"], function (exports, module, _utilsBEM) {
+define(["exports", "module", "utils/BEM", "react"], function (exports, module, _utilsBEM, _react) {
     "use strict";
 
     var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
@@ -8,6 +8,8 @@ define(["exports", "module", "utils/BEM"], function (exports, module, _utilsBEM)
     var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
 
     var BEM = _interopRequire(_utilsBEM);
+
+    var React = _interopRequire(_react);
 
     var b = BEM.b("snake");
 

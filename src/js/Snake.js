@@ -1,4 +1,5 @@
 import BEM from "utils/BEM";
+import React from "react";
 
 var b = BEM.b("snake");
 
