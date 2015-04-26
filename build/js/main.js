@@ -1,7 +1,9 @@
-define(["exports", "Game", "Snake"], function (exports, _Game, _Snake) {
+define(["exports", "react", "Game", "Snake"], function (exports, _react, _Game, _Snake) {
   "use strict";
 
   var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+
+  var React = _interopRequire(_react);
 
   var Game = _interopRequire(_Game);
 
@@ -9,5 +11,5 @@ define(["exports", "Game", "Snake"], function (exports, _Game, _Snake) {
 
   //window.newGame = new Game();
 
-  new Snake(document.body);
+  React.render(React.createElement(Snake, null), document.body);
 });

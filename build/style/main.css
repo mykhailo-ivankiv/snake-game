@@ -1,4 +1,5 @@
 .snake {
+  position: relative;
   height: 360px;
   width: 360px;
   margin: 20px auto;
@@ -25,6 +26,10 @@
 body {
   margin: 0;
   padding: 0; }
+
+.statistics {
+  position: absolute;
+  right: -130px; }
 
 .game-container {
   width: 375px;

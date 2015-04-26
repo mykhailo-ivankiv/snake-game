@@ -1,149 +1,182 @@
-define(["exports", "module", "utils/BEM"], function (exports, module, _utilsBEM) {
+define(["exports", "module", "utils/BEM", "react", "Statistics"], function (exports, module, _utilsBEM, _react, _Statistics) {
     "use strict";
 
     var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
     var _createClass = (function () { function defineProperties(target, props) { for (var key in props) { var prop = props[key]; prop.configurable = true; if (prop.value) prop.writable = true; } Object.defineProperties(target, props); } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
+    var _inherits = function (subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
+
     var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
 
     var BEM = _interopRequire(_utilsBEM);
 
+    var React = _interopRequire(_react);
+
+    var Statistics = _interopRequire(_Statistics);
+
     var b = BEM.b("snake");
 
-    var Snake = (function () {
-        function Snake(_x, config) {
-            var container = arguments[0] === undefined ? document.body : arguments[0];
-
+    var Snake = (function (_React$Component) {
+        function Snake() {
             _classCallCheck(this, Snake);
 
-            this.container = container;
-            this.model = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 0, 0], [0, 0, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 0, 0], [0, 0, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
-
-            this.snake = [{ x: 6, y: 0 }, { x: 5, y: 0 }, { x: 4, y: 0 }, { x: 3, y: 0 }, { x: 2, y: 0 }, { x: 1, y: 0 }];
-
-            this.render();
-
-            this.direction = "right"; // "right", "left", "top", "bottom";
-
-            container.addEventListener("keydown", this.changeSnakeDirection.bind(this));
-
+            //this.container = container;
+            this.state = {
+                pointer: 0,
+                field: [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 0, 0], [0, 0, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 0, 0], [0, 0, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],
+                snake: [{ x: 6, y: 0 }, { x: 5, y: 0 }, { x: 4, y: 0 }, { x: 3, y: 0 }, { x: 2, y: 0 }, { x: 1, y: 0 }],
+                direction: "right" // "right", "left", "top", "bottom";
+            };
             setInterval(this.updateModel.bind(this), 500);
         }
 
+        _inherits(Snake, _React$Component);
+
         _createClass(Snake, {
+            componentDidMount: {
+                value: function componentDidMount() {
+                    document.body.addEventListener("keydown", this.changeSnakeDirection.bind(this));
+                }
+            },
+            componentWillUnmount: {
+                value: function componentWillUnmount() {
+                    document.body.removeEventListener("keydown", this.changeSnakeDirection);
+                }
+            },
             changeSnakeDirection: {
                 value: function changeSnakeDirection(ev) {
+                    var direction = this.state.direction;
                     var key = ev.keyCode;
 
-                    if (key === 38 && this.direction !== "bottom") {
-                        this.direction = "top";
+                    if (key === 38 && direction !== "bottom") {
+                        direction = "top";
                     } //top
-                    if (key === 37 && this.direction !== "right") {
-                        this.direction = "left";
+                    if (key === 37 && direction !== "right") {
+                        direction = "left";
                     } //left
-                    if (key === 39 && this.direction !== "left") {
-                        this.direction = "right";
+                    if (key === 39 && direction !== "left") {
+                        direction = "right";
                     } //right
-                    if (key === 40 && this.direction !== "top") {
-                        this.direction = "bottom";
+                    if (key === 40 && direction !== "top") {
+                        direction = "bottom";
                     } //bottom
+
+                    this.setState({ direction: direction });
                 }
             },
             updateModel: {
                 value: function updateModel() {
-                    var _this = this;
+                    var field = this.state.field.slice(0); //Clone Array;
+                    var snake = this.state.snake.slice(0);
+                    var _state = this.state;
+                    var direction = _state.direction;
+                    var pointer = _state.pointer;
 
                     var factor = { x: 0, y: 0 };
 
-                    if (this.direction === "top") {
+                    if (direction === "top") {
                         factor.y = -1;
                     }
-                    if (this.direction === "bottom") {
+                    if (direction === "bottom") {
                         factor.y = 1;
                     }
-                    if (this.direction === "left") {
+                    if (direction === "left") {
                         factor.x = -1;
                     }
-                    if (this.direction === "right") {
+                    if (direction === "right") {
                         factor.x = 1;
                     }
 
                     var head = {
-                        x: this.snake[0].x + factor.x,
-                        y: this.snake[0].y + factor.y
+                        x: snake[0].x + factor.x,
+                        y: snake[0].y + factor.y
                     };
 
-                    if (this.model[head.y] === undefined || this.model[head.y][head.x] === undefined) {
+                    if (field[head.y] === undefined || field[head.y][head.x] === undefined) {
                         if (head.y < 0) {
-                            head.y = this.model.length - 1;
+                            head.y = field.length - 1;
                         }
-                        if (head.y >= this.model.length) {
+                        if (head.y >= field.length) {
                             head.y = 0;
                         }
                         if (head.x < 0) {
-                            head.x = this.model[0].length - 1;
+                            head.x = field[0].length - 1;
                         }
-                        if (head.x >= this.model[0].length) {
+                        if (head.x >= field[0].length) {
                             head.x = 0;
                         }
 
-                        this.snake.unshift(head);
+                        snake.unshift(head);
 
-                        var tail = this.snake.pop();
-                        this.model[tail.y][tail.x] = 0;
+                        var tail = snake.pop();
+                        field[tail.y][tail.x] = 0;
 
-                        this.snake.forEach(function (point, i) {
-                            return _this.model[point.y][point.x] = 1;
+                        snake.forEach(function (point, i) {
+                            return field[point.y][point.x] = 1;
                         });
                     } else {
-                        if (this.model[head.y][head.x] === 1) {
+                        if (field[head.y][head.x] === 1) {
                             alert("Game over");
                         }
-                        if (this.model[head.y][head.x] === 2) {
+                        if (field[head.y][head.x] === 2) {
                             alert("Game over");
                         }
-                        if (this.model[head.y][head.x] === 3) {
-                            this.snake.unshift(head);
-                            this.snake.forEach(function (point, i) {
-                                return _this.model[point.y][point.x] = 1;
+                        if (field[head.y][head.x] === 3) {
+                            pointer += 1;
+                            snake.unshift(head);
+                            snake.forEach(function (point, i) {
+                                return field[point.y][point.x] = 1;
                             });
                         }
 
-                        if (this.model[head.y][head.x] === 0) {
-                            this.snake.unshift(head);
+                        if (field[head.y][head.x] === 0) {
+                            snake.unshift(head);
 
-                            var tail = this.snake.pop();
-                            this.model[tail.y][tail.x] = 0;
+                            var tail = snake.pop();
+                            field[tail.y][tail.x] = 0;
 
-                            this.snake.forEach(function (point, i) {
-                                return _this.model[point.y][point.x] = 1;
+                            snake.forEach(function (point, i) {
+                                return field[point.y][point.x] = 1;
                             });
                         }
                     }
 
-                    this.render();
+                    this.setState({
+                        field: field,
+                        snake: snake,
+                        pointer: pointer
+                    });
                 }
             },
             render: {
                 value: function render() {
-                    this.container.innerHTML = "\n            <div class=\"snake\">\n                 " + this.model.map(function (row) {
-                        return "<div class=\"snake__row\">\n                        " + row.map(function (cell) {
-                            return "<div class=\"" + b("cell", {
-                                field: cell === 0,
-                                snake: cell === 1,
-                                wall: cell === 2,
-                                fruit: cell === 3
+                    return React.createElement(
+                        "div",
+                        { className: "snake" },
+                        React.createElement(Statistics, { apples: this.state.pointer }),
+                        this.state.field.map(function (row) {
+                            return React.createElement(
+                                "div",
+                                { className: "snake__row" },
+                                row.map(function (cell) {
+                                    return React.createElement("div", { className: b("cell", {
+                                            field: cell === 0,
+                                            snake: cell === 1,
+                                            wall: cell === 2,
+                                            fruit: cell === 3
 
-                            }) + "\"></div>";
-                        }).join("") + "\n                    </div>";
-                    }).join("") + "\n            </div>\n        ";
+                                        }) });
+                                })
+                            );
+                        })
+                    );
                 }
             }
         });
 
         return Snake;
-    })();
+    })(React.Component);
 
     module.exports = Snake;
 });

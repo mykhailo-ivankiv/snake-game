@@ -1,4 +1,5 @@
 .snake {
+  position: relative;
   height: 360px;
   width: 360px;
   margin: 20px auto;

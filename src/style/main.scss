@@ -20,6 +20,11 @@ body {
     margin: 0;
     padding: 0;
 }
+.statistics {
+    position: absolute;
+    right: -130px;
+}
+
 
 .game-container {
     width: $gameWidth;
