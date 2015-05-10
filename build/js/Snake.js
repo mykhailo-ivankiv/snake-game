@@ -1,4 +1,4 @@
-define(["exports", "module", "utils/BEM", "react", "Statistics"], function (exports, module, _utilsBEM, _react, _Statistics) {
+define(["exports", "module", "utils/BEM", "react", "Statistics", "Actions/SnakeActions"], function (exports, module, _utilsBEM, _react, _Statistics, _ActionsSnakeActions) {
     "use strict";
 
     var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
@@ -15,6 +15,8 @@ define(["exports", "module", "utils/BEM", "react", "Statistics"], function (expo
 
     var Statistics = _interopRequire(_Statistics);
 
+    var SnakeActions = _interopRequire(_ActionsSnakeActions);
+
     var b = BEM.b("snake");
 
     var Snake = (function (_React$Component) {
@@ -23,7 +25,6 @@ define(["exports", "module", "utils/BEM", "react", "Statistics"], function (expo
 
             //this.container = container;
             this.state = {
-                pointer: 0,
                 field: [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 0, 0], [0, 0, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 0, 0], [0, 0, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],
                 snake: [{ x: 6, y: 0 }, { x: 5, y: 0 }, { x: 4, y: 0 }, { x: 3, y: 0 }, { x: 2, y: 0 }, { x: 1, y: 0 }],
                 direction: "right" // "right", "left", "top", "bottom";
@@ -65,13 +66,16 @@ define(["exports", "module", "utils/BEM", "react", "Statistics"], function (expo
                     this.setState({ direction: direction });
                 }
             },
+            eatenApple: {
+                value: function eatenApple() {
+                    SnakeActions.EatenApple();
+                }
+            },
             updateModel: {
                 value: function updateModel() {
                     var field = this.state.field.slice(0); //Clone Array;
                     var snake = this.state.snake.slice(0);
-                    var _state = this.state;
-                    var direction = _state.direction;
-                    var pointer = _state.pointer;
+                    var direction = this.state.direction;
 
                     var factor = { x: 0, y: 0 };
 
@@ -123,7 +127,7 @@ define(["exports", "module", "utils/BEM", "react", "Statistics"], function (expo
                             alert("Game over");
                         }
                         if (field[head.y][head.x] === 3) {
-                            pointer += 1;
+                            this.eatenApple();
                             snake.unshift(head);
                             snake.forEach(function (point, i) {
                                 return field[point.y][point.x] = 1;
@@ -144,8 +148,7 @@ define(["exports", "module", "utils/BEM", "react", "Statistics"], function (expo
 
                     this.setState({
                         field: field,
-                        snake: snake,
-                        pointer: pointer
+                        snake: snake
                     });
                 }
             },
@@ -154,7 +157,6 @@ define(["exports", "module", "utils/BEM", "react", "Statistics"], function (expo
                     return React.createElement(
                         "div",
                         { className: "snake" },
-                        React.createElement(Statistics, { apples: this.state.pointer }),
                         this.state.field.map(function (row) {
                             return React.createElement(
                                 "div",

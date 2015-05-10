@@ -1,14 +1,13 @@
 import BEM from "utils/BEM";
 import React from "react";
 import Statistics from "Statistics";
-
+import SnakeActions from "Actions/SnakeActions";
 var b = BEM.b("snake");
 
 class Snake extends React.Component {
     constructor () {
         //this.container = container;
         this.state = {
-            pointer: 0,
             field : [
                 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -59,10 +58,14 @@ class Snake extends React.Component {
         this.setState({direction});
     }
 
+    eatenApple () {
+        SnakeActions.EatenApple();
+    }
+
     updateModel () {
         var field = this.state.field.slice(0); //Clone Array;
         var snake = this.state.snake.slice(0);
-        var {direction, pointer} = this.state;
+        var {direction} = this.state;
 
 
         let factor = { x: 0, y: 0};
@@ -93,7 +96,7 @@ class Snake extends React.Component {
             if (field[head.y][head.x] === 1) { alert("Game over"); }
             if (field[head.y][head.x] === 2) { alert("Game over")}
             if (field[head.y][head.x] === 3) {
-                pointer += 1;
+                this.eatenApple();
                 snake.unshift(head);
                 snake.forEach((point, i) => field[point.y][point.x] = 1);
             }
@@ -110,16 +113,13 @@ class Snake extends React.Component {
 
         this.setState({
             field,
-            snake,
-            pointer
+            snake
         });
     }
 
     render () {
         return (
             <div className="snake">
-                <Statistics apples = {this.state.pointer}/>
-
                 {this.state.field.map(row =>
                     <div className="snake__row">
 

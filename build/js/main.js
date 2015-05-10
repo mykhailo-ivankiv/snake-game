@@ -1,15 +1,11 @@
-define(["exports", "react", "Game", "Snake"], function (exports, _react, _Game, _Snake) {
+define(["exports", "react", "Layout"], function (exports, _react, _Layout) {
   "use strict";
 
   var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
   var React = _interopRequire(_react);
 
-  var Game = _interopRequire(_Game);
+  var Layout = _interopRequire(_Layout);
 
-  var Snake = _interopRequire(_Snake);
-
-  //window.newGame = new Game();
-
-  React.render(React.createElement(Snake, null), document.body);
+  React.render(React.createElement(Layout, null), document.body);
 });

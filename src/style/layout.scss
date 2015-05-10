@@ -1,0 +1,13 @@
+.layout {
+  &__main {
+    width: 360px;
+    margin: auto;
+  }
+  &__additional {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+
+  }
+
+}

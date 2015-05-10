@@ -23,6 +23,14 @@
     .snake__cell--fruit {
       background: #1abc9c; }
 
+.layout__main {
+  width: 360px;
+  margin: auto; }
+.layout__additional {
+  position: absolute;
+  left: 20px;
+  top: 20px; }
+
 body {
   margin: 0;
   padding: 0; }

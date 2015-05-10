@@ -1,7 +1,4 @@
 import React from "react";
+import Layout from "Layout"
 
-import Game from "Game";
-import Snake from "Snake"
-//window.newGame = new Game();
-
-React.render(<Snake />, document.body);
+React.render(<Layout />, document.body);
